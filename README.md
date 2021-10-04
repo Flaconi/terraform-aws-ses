@@ -54,24 +54,6 @@ Description: Domain name for which SES will be configured
 
 Type: `string`
 
-### sns\_topic\_name\_for\_ses\_bounces
-
-Description: Name of the SNS topic where the bounces are recorded
-
-Type: `string`
-
-### sns\_topic\_name\_for\_ses\_complaints
-
-Description: Name of the SNS topic where the complaints are recorded
-
-Type: `string`
-
-### sns\_topic\_name\_for\_ses\_deliveries
-
-Description: Name of the SNS topic where the delivery are recorded
-
-Type: `string`
-
 ## Optional Inputs
 
 The following input variables are optional (have default values):
@@ -87,6 +69,54 @@ Default: `"eu-central-1"`
 ### zone\_id
 
 Description: Route 53 zone ID where the verification TXT record will be created. If this remains as an empty string, it means that the verification DNS record has been handled outside of Terraform.
+
+Type: `string`
+
+Default: `""`
+
+### sns\_topic\_name\_for\_ses\_bounces
+
+Description: Name of the SNS topic where the bounces are recorded
+
+Type: `string`
+
+Default: `""`
+
+### sns\_topic\_arn\_for\_ses\_bounces
+
+Description: ARN of the SNS topic where the bounces are recorded
+
+Type: `string`
+
+Default: `""`
+
+### sns\_topic\_name\_for\_ses\_complaints
+
+Description: Name of the SNS topic where the complaints are recorded
+
+Type: `string`
+
+Default: `""`
+
+### sns\_topic\_arn\_for\_ses\_complaints
+
+Description: ARN of the SNS topic where the complaints are recorded
+
+Type: `string`
+
+Default: `""`
+
+### sns\_topic\_name\_for\_ses\_deliveries
+
+Description: Name of the SNS topic where the delivery are recorded
+
+Type: `string`
+
+Default: `""`
+
+### sns\_topic\_arn\_for\_ses\_deliveries
+
+Description: ARN of the SNS topic where the delivery are recorded
 
 Type: `string`
 
