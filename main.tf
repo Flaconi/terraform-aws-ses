@@ -21,7 +21,7 @@ resource "aws_ses_domain_identity_verification" "this_route53_dns" {
 }
 
 resource "aws_ses_domain_identity_verification" "this_other_dns" {
-  count  = var.zone_id == "" ? 1 : 0
+  count  = var.zone_id == "" && var.perform_domain_verification ? 1 : 0
   domain = aws_ses_domain_identity.this.id
 }
 

@@ -74,6 +74,14 @@ Type: `string`
 
 Default: `""`
 
+### perform\_domain\_verification
+
+Description: Boolean flag for performing the domain identity verification. This is useful when the DNS zone is not handled by Route 53 and once the module outputs the TXT records, the user can create those records elsewhere and return to this module to flip this toggle.
+
+Type: `bool`
+
+Default: `false`
+
 ### sns\_topic\_name\_for\_ses\_bounces
 
 Description: Name of the SNS topic where the bounces are recorded
