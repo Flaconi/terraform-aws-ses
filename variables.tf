@@ -1,19 +1,3 @@
-variable "region" {
-  description = "The AWS region in which the resources are handled"
-  default     = "eu-central-1"
-  type        = string
-}
-
-variable "allowed_account_id" {
-  description = "A string of a single AWS account ID to which this project is strictly bound"
-  type        = string
-}
-
-variable "env" {
-  description = "The environment name to which this project will be applied against (e.g.: common, common-secure, dev, prod, testing)"
-  type        = string
-}
-
 variable "domain" {
   description = "Domain name for which SES will be configured"
   type        = string
