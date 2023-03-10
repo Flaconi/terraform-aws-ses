@@ -36,18 +36,6 @@ Terraform module to handle the SES resources.
 
 The following input variables are required:
 
-### <a name="input_allowed_account_id"></a> [allowed\_account\_id](#input\_allowed\_account\_id)
-
-Description: A string of a single AWS account ID to which this project is strictly bound
-
-Type: `string`
-
-### <a name="input_env"></a> [env](#input\_env)
-
-Description: The environment name to which this project will be applied against (e.g.: common, common-secure, dev, prod, testing)
-
-Type: `string`
-
 ### <a name="input_domain"></a> [domain](#input\_domain)
 
 Description: Domain name for which SES will be configured
@@ -57,14 +45,6 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
-
-### <a name="input_region"></a> [region](#input\_region)
-
-Description: The AWS region in which the resources are handled
-
-Type: `string`
-
-Default: `"eu-central-1"`
 
 ### <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id)
 
@@ -153,4 +133,4 @@ Default: `{}`
 
 **[MIT License](LICENSE)**
 
-Copyright (c) 2021 **[flaconi](https://github.com/flaconi)**
+Copyright (c) 2023 **[flaconi](https://github.com/Flaconi)**
