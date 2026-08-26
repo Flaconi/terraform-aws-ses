@@ -50,9 +50,3 @@ variable "sns_topic_arn_for_ses_deliveries" {
   type        = string
   default     = ""
 }
-
-variable "default_tags" {
-  description = "A map of tags to apply to all AWS resources"
-  default     = {}
-  type        = map(string)
-}
