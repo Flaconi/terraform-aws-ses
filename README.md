@@ -17,7 +17,7 @@ Terraform module to handle the SES resources.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.4 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.61 |
 
 <!-- TFDOCS_PROVIDER_END -->
 
@@ -27,7 +27,7 @@ Terraform module to handle the SES resources.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.4 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.61 |
 
 <!-- TFDOCS_REQUIREMENTS_END -->
 
@@ -109,14 +109,6 @@ Description: ARN of the SNS topic where the delivery are recorded
 Type: `string`
 
 Default: `""`
-
-### <a name="input_default_tags"></a> [default\_tags](#input\_default\_tags)
-
-Description: A map of tags to apply to all AWS resources
-
-Type: `map(string)`
-
-Default: `{}`
 
 <!-- TFDOCS_INPUTS_END -->
 
