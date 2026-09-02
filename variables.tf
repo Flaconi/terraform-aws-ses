@@ -9,6 +9,18 @@ variable "zone_id" {
   default     = ""
 }
 
+variable "create_dkim_records" {
+  description = "Whether to create the DKIM CNAME records in Route 53. Requires zone_id to be set. Set to false when managing the DNS records outside of Terraform."
+  type        = bool
+  default     = false
+}
+
+variable "create_domain_verification_record" {
+  description = "Whether to create the _amazonses TXT record in Route 53 for domain verification. Requires zone_id to be set. Set to false when managing the DNS record outside of Terraform."
+  type        = bool
+  default     = false
+}
+
 variable "perform_domain_verification" {
   description = "Boolean flag for performing the domain identity verification. This is useful when the DNS zone is not handled by Route 53 and once the module outputs the TXT records, the user can create those records elsewhere and return to this module to flip this toggle."
   type        = bool

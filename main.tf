@@ -3,7 +3,7 @@ resource "aws_ses_domain_identity" "this" {
 }
 
 resource "aws_route53_record" "this" {
-  count   = var.zone_id == "" ? 0 : 1
+  count   = var.zone_id != "" && var.create_domain_verification_record ? 1 : 0
   zone_id = var.zone_id
   name    = "_amazonses.${var.domain}"
   type    = "TXT"
@@ -12,7 +12,7 @@ resource "aws_route53_record" "this" {
 }
 
 resource "aws_ses_domain_identity_verification" "this_route53_dns" {
-  count  = var.zone_id == "" ? 0 : 1
+  count  = var.zone_id != "" && var.create_domain_verification_record ? 1 : 0
   domain = aws_ses_domain_identity.this.id
 
   depends_on = [
@@ -27,6 +27,15 @@ resource "aws_ses_domain_identity_verification" "this_other_dns" {
 
 resource "aws_ses_domain_dkim" "this" {
   domain = aws_ses_domain_identity.this.domain
+}
+
+resource "aws_route53_record" "dkim" {
+  for_each = var.zone_id != "" && var.create_dkim_records ? toset(aws_ses_domain_dkim.this.dkim_tokens) : toset([])
+  zone_id  = var.zone_id
+  name     = "${each.value}._domainkey.${var.domain}"
+  type     = "CNAME"
+  ttl      = "1800"
+  records  = ["${each.value}.dkim.amazonses.com"]
 }
 
 resource "aws_ses_domain_mail_from" "this" {
