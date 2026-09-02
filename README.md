@@ -54,6 +54,22 @@ Type: `string`
 
 Default: `""`
 
+### <a name="input_create_dkim_records"></a> [create\_dkim\_records](#input\_create\_dkim\_records)
+
+Description: Whether to create the DKIM CNAME records in Route 53. Requires zone\_id to be set. Set to false when managing the DNS records outside of Terraform.
+
+Type: `bool`
+
+Default: `false`
+
+### <a name="input_create_domain_verification_record"></a> [create\_domain\_verification\_record](#input\_create\_domain\_verification\_record)
+
+Description: Whether to create the \_amazonses TXT record in Route 53 for domain verification. Requires zone\_id to be set. Set to false when managing the DNS record outside of Terraform.
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_perform_domain_verification"></a> [perform\_domain\_verification](#input\_perform\_domain\_verification)
 
 Description: Boolean flag for performing the domain identity verification. This is useful when the DNS zone is not handled by Route 53 and once the module outputs the TXT records, the user can create those records elsewhere and return to this module to flip this toggle.
