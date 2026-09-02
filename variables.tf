@@ -15,6 +15,22 @@ variable "perform_domain_verification" {
   default     = false
 }
 
+variable "mail_from_subdomain" {
+  description = "Subdomain to use as the MAIL FROM domain (e.g. \"mail\" produces mail.<domain>). Leave empty to disable custom MAIL FROM."
+  type        = string
+  default     = ""
+}
+
+variable "mail_from_behavior_on_mx_failure" {
+  description = "Action to take if the MAIL FROM domain's MX record is not found. Valid values: UseDefaultValue, RejectMessage."
+  type        = string
+  default     = "UseDefaultValue"
+  validation {
+    condition     = contains(["UseDefaultValue", "RejectMessage"], var.mail_from_behavior_on_mx_failure)
+    error_message = "mail_from_behavior_on_mx_failure must be either UseDefaultValue or RejectMessage."
+  }
+}
+
 variable "sns_topic_name_for_ses_bounces" {
   description = "Name of the SNS topic where the bounces are recorded"
   type        = string
