@@ -3,20 +3,14 @@ variable "domain" {
   type        = string
 }
 
-variable "zone_id" {
-  description = "Route 53 zone ID where the verification TXT record will be created. If this remains as an empty string, it means that the verification DNS record has been handled outside of Terraform."
-  type        = string
-  default     = ""
-}
-
 variable "create_dkim_records" {
-  description = "Whether to create the DKIM CNAME records in Route 53. Requires zone_id to be set. Set to false when managing the DNS records outside of Terraform."
+  description = "Whether to create the DKIM CNAME records in Route 53. Set to false when managing the DNS records outside of Terraform."
   type        = bool
   default     = false
 }
 
 variable "create_domain_verification_record" {
-  description = "Whether to create the _amazonses TXT record in Route 53 for domain verification. Requires zone_id to be set. Set to false when managing the DNS record outside of Terraform."
+  description = "Whether to create the _amazonses TXT record in Route 53 for domain verification. Set to false when managing the DNS record outside of Terraform."
   type        = bool
   default     = false
 }
