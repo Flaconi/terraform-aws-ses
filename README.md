@@ -46,17 +46,9 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id)
-
-Description: Route 53 zone ID where the verification TXT record will be created. If this remains as an empty string, it means that the verification DNS record has been handled outside of Terraform.
-
-Type: `string`
-
-Default: `""`
-
 ### <a name="input_create_dkim_records"></a> [create\_dkim\_records](#input\_create\_dkim\_records)
 
-Description: Whether to create the DKIM CNAME records in Route 53. Requires zone\_id to be set. Set to false when managing the DNS records outside of Terraform.
+Description: Whether to create the DKIM CNAME records in Route 53. Set to false when managing the DNS records outside of Terraform.
 
 Type: `bool`
 
@@ -64,7 +56,7 @@ Default: `false`
 
 ### <a name="input_create_domain_verification_record"></a> [create\_domain\_verification\_record](#input\_create\_domain\_verification\_record)
 
-Description: Whether to create the \_amazonses TXT record in Route 53 for domain verification. Requires zone\_id to be set. Set to false when managing the DNS record outside of Terraform.
+Description: Whether to create the \_amazonses TXT record in Route 53 for domain verification. Set to false when managing the DNS record outside of Terraform.
 
 Type: `bool`
 

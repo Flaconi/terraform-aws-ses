@@ -3,8 +3,8 @@ resource "aws_ses_domain_identity" "this" {
 }
 
 resource "aws_route53_record" "this" {
-  count   = var.zone_id != "" && var.create_domain_verification_record ? 1 : 0
-  zone_id = var.zone_id
+  count   = var.create_domain_verification_record ? 1 : 0
+  zone_id = data.aws_route53_zone.this[0].zone_id
   name    = "_amazonses.${var.domain}"
   type    = "TXT"
   ttl     = "600"
@@ -12,7 +12,7 @@ resource "aws_route53_record" "this" {
 }
 
 resource "aws_ses_domain_identity_verification" "this_route53_dns" {
-  count  = var.zone_id != "" && var.create_domain_verification_record ? 1 : 0
+  count  = var.create_domain_verification_record ? 1 : 0
   domain = aws_ses_domain_identity.this.id
 
   depends_on = [
@@ -21,7 +21,7 @@ resource "aws_ses_domain_identity_verification" "this_route53_dns" {
 }
 
 resource "aws_ses_domain_identity_verification" "this_other_dns" {
-  count  = var.zone_id == "" && var.perform_domain_verification ? 1 : 0
+  count  = !var.create_domain_verification_record && var.perform_domain_verification ? 1 : 0
   domain = aws_ses_domain_identity.this.id
 }
 
@@ -30,8 +30,8 @@ resource "aws_ses_domain_dkim" "this" {
 }
 
 resource "aws_route53_record" "dkim" {
-  for_each = var.zone_id != "" && var.create_dkim_records ? toset(aws_ses_domain_dkim.this.dkim_tokens) : toset([])
-  zone_id  = var.zone_id
+  for_each = var.create_dkim_records ? toset(aws_ses_domain_dkim.this.dkim_tokens) : toset([])
+  zone_id  = data.aws_route53_zone.this[0].zone_id
   name     = "${each.value}._domainkey.${var.domain}"
   type     = "CNAME"
   ttl      = "1800"
@@ -46,8 +46,8 @@ resource "aws_ses_domain_mail_from" "this" {
 }
 
 resource "aws_route53_record" "mail_from_mx" {
-  count   = local.create_mail_from && var.zone_id != "" ? 1 : 0
-  zone_id = var.zone_id
+  count   = local.create_mail_from ? 1 : 0
+  zone_id = data.aws_route53_zone.this[0].zone_id
   name    = "${var.mail_from_subdomain}.${var.domain}"
   type    = "MX"
   ttl     = "600"
@@ -55,8 +55,8 @@ resource "aws_route53_record" "mail_from_mx" {
 }
 
 resource "aws_route53_record" "mail_from_spf" {
-  count   = local.create_mail_from && var.zone_id != "" ? 1 : 0
-  zone_id = var.zone_id
+  count   = local.create_mail_from ? 1 : 0
+  zone_id = data.aws_route53_zone.this[0].zone_id
   name    = "${var.mail_from_subdomain}.${var.domain}"
   type    = "TXT"
   ttl     = "600"
