@@ -62,6 +62,22 @@ Type: `bool`
 
 Default: `false`
 
+### <a name="input_mail_from_subdomain"></a> [mail\_from\_subdomain](#input\_mail\_from\_subdomain)
+
+Description: Subdomain to use as the MAIL FROM domain (e.g. "mail" produces mail.<domain>). Leave empty to disable custom MAIL FROM.
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_mail_from_behavior_on_mx_failure"></a> [mail\_from\_behavior\_on\_mx\_failure](#input\_mail\_from\_behavior\_on\_mx\_failure)
+
+Description: Action to take if the MAIL FROM domain's MX record is not found. Valid values: UseDefaultValue, RejectMessage.
+
+Type: `string`
+
+Default: `"UseDefaultValue"`
+
 ### <a name="input_sns_topic_name_for_ses_bounces"></a> [sns\_topic\_name\_for\_ses\_bounces](#input\_sns\_topic\_name\_for\_ses\_bounces)
 
 Description: Name of the SNS topic where the bounces are recorded
@@ -117,6 +133,9 @@ Default: `""`
 
 | Name | Description |
 |------|-------------|
+| <a name="output_mail_from_domain"></a> [mail\_from\_domain](#output\_mail\_from\_domain) | The custom MAIL FROM domain. Null when 'mail\_from\_subdomain' is not set. When 'zone\_id' is empty, you must create the MX and SPF records for this domain externally using the 'mail\_from\_mx\_record' and 'mail\_from\_spf\_record' outputs. |
+| <a name="output_mail_from_mx_record"></a> [mail\_from\_mx\_record](#output\_mail\_from\_mx\_record) | MX record value to set on the MAIL FROM domain when DNS is managed outside Route 53. Null when 'mail\_from\_subdomain' is not set. |
+| <a name="output_mail_from_spf_record"></a> [mail\_from\_spf\_record](#output\_mail\_from\_spf\_record) | SPF TXT record value to set on the MAIL FROM domain when DNS is managed outside Route 53. Null when 'mail\_from\_subdomain' is not set. |
 | <a name="output_verification_token"></a> [verification\_token](#output\_verification\_token) | A code which when added to the domain as a TXT record will signal to SES that the owner of the domain has authorised SES to act on their behalf. If you pass a non-empty string as the value for the 'zone\_id' variable, you can ignore this output as the TXT record will be created in the Route 53 zone. Otherwise, you will need to handle the TXT record and use the value of this output. |
 
 <!-- TFDOCS_OUTPUTS_END -->
